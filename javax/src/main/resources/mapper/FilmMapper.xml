@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mango.mapper.FilmMapper" >
+  <resultMap id="BaseResultMap" type="com.mango.model.Film" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="head_portrait" property="headPortrait" jdbcType="VARCHAR" />
+    <result column="director" property="director" jdbcType="VARCHAR" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="duration" property="duration" jdbcType="INTEGER" />
+    <result column="film_type" property="filmType" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="performer" property="performer" jdbcType="VARCHAR" />
+    <result column="release_date" property="releaseDate" jdbcType="TIMESTAMP" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="synopsis" property="synopsis" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_time, head_portrait, director, district, duration, film_type, name, performer, 
+    release_date, score, synopsis, uid, update_time, state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from film
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from film
+    where
+    <if test="uid != null" >
+      uid = #{uid,jdbcType=VARCHAR},
+    </if>
+    ORDER BY create_time
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from film
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mango.model.Film" >
+    insert into film (id, create_time, head_portrait, 
+      director, district, duration, 
+      film_type, name, performer, 
+      release_date, score, synopsis, 
+      uid, update_time, state
+      )
+    values (#{id,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{headPortrait,jdbcType=VARCHAR}, 
+      #{director,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{duration,jdbcType=INTEGER}, 
+      #{filmType,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{performer,jdbcType=VARCHAR}, 
+      #{releaseDate,jdbcType=TIMESTAMP}, #{score,jdbcType=INTEGER}, #{synopsis,jdbcType=VARCHAR}, 
+      #{uid,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mango.model.Film" >
+    insert into film
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="headPortrait != null" >
+        head_portrait,
+      </if>
+      <if test="director != null" >
+        director,
+      </if>
+      <if test="district != null" >
+        district,
+      </if>
+      <if test="duration != null" >
+        duration,
+      </if>
+      <if test="filmType != null" >
+        film_type,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="performer != null" >
+        performer,
+      </if>
+      <if test="releaseDate != null" >
+        release_date,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="synopsis != null" >
+        synopsis,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="headPortrait != null" >
+        #{headPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null" >
+        #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null" >
+        #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="filmType != null" >
+        #{filmType,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="performer != null" >
+        #{performer,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null" >
+        #{releaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="synopsis != null" >
+        #{synopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mango.model.Film" >
+    update film
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="headPortrait != null" >
+        head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null" >
+        director = #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        district = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="duration != null" >
+        duration = #{duration,jdbcType=INTEGER},
+      </if>
+      <if test="filmType != null" >
+        film_type = #{filmType,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="performer != null" >
+        performer = #{performer,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null" >
+        release_date = #{releaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="synopsis != null" >
+        synopsis = #{synopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mango.model.Film" >
+    update film
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      director = #{director,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      duration = #{duration,jdbcType=INTEGER},
+      film_type = #{filmType,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      performer = #{performer,jdbcType=VARCHAR},
+      release_date = #{releaseDate,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=INTEGER},
+      synopsis = #{synopsis,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

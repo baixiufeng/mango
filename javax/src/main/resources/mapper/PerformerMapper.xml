@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mango.mapper.PerformerMapper" >
+  <resultMap id="BaseResultMap" type="com.mango.model.Performer" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="filmid" property="filmid" jdbcType="VARCHAR" />
+    <result column="head_portrait" property="headPortrait" jdbcType="VARCHAR" />
+    <result column="news" property="news" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="works" property="works" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_time, filmid, head_portrait, news, photo, update_time, userid, works
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from performer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from performer
+    where
+    <if test="userid != null" >
+    userid = #{userid,jdbcType=VARCHAR},
+  </if>
+    ORDER BY create_time
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from performer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mango.model.Performer" >
+    insert into performer (id, create_time, filmid, 
+      head_portrait, news, photo, 
+      update_time, userid, works
+      )
+    values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{filmid,jdbcType=VARCHAR}, 
+      #{headPortrait,jdbcType=VARCHAR}, #{news,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{userid,jdbcType=VARCHAR}, #{works,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mango.model.Performer" >
+    insert into performer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="filmid != null" >
+        filmid,
+      </if>
+      <if test="headPortrait != null" >
+        head_portrait,
+      </if>
+      <if test="news != null" >
+        news,
+      </if>
+      <if test="photo != null" >
+        photo,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="works != null" >
+        works,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filmid != null" >
+        #{filmid,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortrait != null" >
+        #{headPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="news != null" >
+        #{news,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="works != null" >
+        #{works,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mango.model.Performer" >
+    update performer
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filmid != null" >
+        filmid = #{filmid,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortrait != null" >
+        head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="news != null" >
+        news = #{news,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="works != null" >
+        works = #{works,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mango.model.Performer" >
+    update performer
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      filmid = #{filmid,jdbcType=VARCHAR},
+      head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      news = #{news,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=VARCHAR},
+      works = #{works,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

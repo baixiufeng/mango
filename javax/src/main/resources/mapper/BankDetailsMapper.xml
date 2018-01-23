@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mango.mapper.BankDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.mango.model.BankDetails">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="bankid" jdbcType="VARCHAR" property="bankid" />
+    <result column="card" jdbcType="VARCHAR" property="card" />
+    <result column="openbank" jdbcType="VARCHAR" property="openbank" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, bankid, card, openbank, uid, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bank_details
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bank_details
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mango.model.BankDetails">
+    insert into bank_details (id, name, bankid, 
+      card, openbank, uid, 
+      create_time, update_time)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{bankid,jdbcType=VARCHAR}, 
+      #{card,jdbcType=VARCHAR}, #{openbank,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mango.model.BankDetails">
+    insert into bank_details
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="bankid != null">
+        bankid,
+      </if>
+      <if test="card != null">
+        card,
+      </if>
+      <if test="openbank != null">
+        openbank,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null">
+        #{bankid,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null">
+        #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="openbank != null">
+        #{openbank,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mango.model.BankDetails">
+    update bank_details
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null">
+        bankid = #{bankid,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null">
+        card = #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="openbank != null">
+        openbank = #{openbank,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mango.model.BankDetails">
+    update bank_details
+    set name = #{name,jdbcType=VARCHAR},
+      bankid = #{bankid,jdbcType=VARCHAR},
+      card = #{card,jdbcType=VARCHAR},
+      openbank = #{openbank,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT
+    bank_details.id,
+    bank_details.`name`,
+    bank_details.bankid,
+    bank_details.card,
+    bank_details.openbank,
+    bank_details.create_time,
+    bank_details.update_time,
+    bank_details.uid
+    FROM
+    user_info ,
+    bank_details
+    WHERE
+    <if test="uid != null and uid != ''">
+      bank_details.uid =  #{uid,jdbcType=VARCHAR} AND
+    </if>
+    user_info.id = bank_details.uid
+    ORDER BY creat_time
+  </select>
+</mapper>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mango.mapper.PictureMapper">
+  <resultMap id="BaseResultMap" type="com.mango.model.Picture">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="picture_name" jdbcType="VARCHAR" property="pictureName" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="synopsis" jdbcType="VARCHAR" property="synopsis" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, picture_name, type, synopsis, uid, creat_time, update_time, score, photo
+  </sql>
+
+  <insert id="insert" parameterType="com.mango.model.Picture">
+    insert into picture (id, picture_name, type, 
+      synopsis, uid, creat_time, 
+      update_time, score, photo
+      )
+    values (#{id,jdbcType=VARCHAR}, #{pictureName,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{synopsis,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{score,jdbcType=INTEGER}, #{photo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mango.model.Picture">
+    insert into picture
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pictureName != null">
+        picture_name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="synopsis != null">
+        synopsis,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="creatTime != null">
+        creat_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureName != null">
+        #{pictureName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="synopsis != null">
+        #{synopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null">
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mango.model.Picture">
+    update picture
+    <set>
+      <if test="pictureName != null">
+        picture_name = #{pictureName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="synopsis != null">
+        synopsis = #{synopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null">
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mango.model.Picture">
+    update picture
+    set picture_name = #{pictureName,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      synopsis = #{synopsis,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=INTEGER},
+      photo = #{photo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+    user_info.nick_name AS uid,
+    picture.id AS id,
+    picture.picture_name AS picture_name,
+    picture.type AS type,
+    picture.synopsis AS synopsis,
+    picture.creat_time AS creat_time,
+    picture.update_time AS update_time,
+    picture.score AS score,
+    picture.photo AS photo
+    FROM
+    user_info ,
+    picture
+    WHERE
+     picture.id =  #{id,jdbcType=VARCHAR} AND
+     picture.uid=user_info.id
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from picture
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT
+    user_info.nick_name AS uid,
+    picture.id AS id,
+    picture.picture_name AS picture_name,
+    picture.type AS type,
+    picture.synopsis AS synopsis,
+    picture.creat_time AS creat_time,
+    picture.update_time AS update_time,
+    picture.score AS score,
+    picture.photo AS photo
+    FROM
+    user_info ,
+    picture
+    WHERE
+    <if test="uid != null and uid != ''">
+      picture.uid =  #{uid,jdbcType=VARCHAR} AND
+    </if>
+     picture.uid=user_info.id
+    ORDER BY creat_time
+  </select>
+</mapper>

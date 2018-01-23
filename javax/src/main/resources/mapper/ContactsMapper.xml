@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mango.mapper.ContactsMapper">
+
+  <resultMap id="BaseResultMap" type="com.mango.model.Contacts">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="head_portrait" jdbcType="VARCHAR" property="headPortrait" />
+    <result column="hate" jdbcType="VARCHAR" property="hate" />
+    <result column="like_movie" jdbcType="VARCHAR" property="likeMovie" />
+    <result column="likes" jdbcType="VARCHAR" property="likes" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="record" jdbcType="VARCHAR" property="record" />
+    <result column="seat" jdbcType="VARCHAR" property="seat" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_time, head_portrait, hate, like_movie, likes, name, record, seat, uid, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contacts
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="findAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from contacts
+    WHERE
+    <if test="uid != null and uid != ''">
+      uid =  #{uid,jdbcType=VARCHAR} AND
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from contacts
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mango.model.Contacts">
+    insert into contacts (id, create_time, head_portrait, 
+      hate, like_movie, likes, 
+      name, record, seat, 
+      uid, update_time)
+    values (#{id,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{headPortrait,jdbcType=VARCHAR}, 
+      #{hate,jdbcType=VARCHAR}, #{likeMovie,jdbcType=VARCHAR}, #{likes,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{record,jdbcType=VARCHAR}, #{seat,jdbcType=VARCHAR}, 
+      #{uid,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mango.model.Contacts">
+    insert into contacts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="headPortrait != null">
+        head_portrait,
+      </if>
+      <if test="hate != null">
+        hate,
+      </if>
+      <if test="likeMovie != null">
+        like_movie,
+      </if>
+      <if test="likes != null">
+        likes,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="record != null">
+        record,
+      </if>
+      <if test="seat != null">
+        seat,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="headPortrait != null">
+        #{headPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="hate != null">
+        #{hate,jdbcType=VARCHAR},
+      </if>
+      <if test="likeMovie != null">
+        #{likeMovie,jdbcType=VARCHAR},
+      </if>
+      <if test="likes != null">
+        #{likes,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="record != null">
+        #{record,jdbcType=VARCHAR},
+      </if>
+      <if test="seat != null">
+        #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mango.model.Contacts">
+    update contacts
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="headPortrait != null">
+        head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="hate != null">
+        hate = #{hate,jdbcType=VARCHAR},
+      </if>
+      <if test="likeMovie != null">
+        like_movie = #{likeMovie,jdbcType=VARCHAR},
+      </if>
+      <if test="likes != null">
+        likes = #{likes,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="record != null">
+        record = #{record,jdbcType=VARCHAR},
+      </if>
+      <if test="seat != null">
+        seat = #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mango.model.Contacts">
+    update contacts
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      hate = #{hate,jdbcType=VARCHAR},
+      like_movie = #{likeMovie,jdbcType=VARCHAR},
+      likes = #{likes,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      record = #{record,jdbcType=VARCHAR},
+      seat = #{seat,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

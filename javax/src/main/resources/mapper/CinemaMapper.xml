@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mango.mapper.CinemaMapper">
+  <resultMap id="BaseResultMap" type="com.mango.model.Cinema" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="projection_time" property="projectionTime" jdbcType="TIMESTAMP" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="film_name" property="filmName" jdbcType="VARCHAR" />
+    <result column="heya" property="heya" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="seat" property="seat" jdbcType="VARCHAR" />
+    <result column="shopid" property="shopid" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DOUBLE" />
+    <result column="latitude" property="latitude" jdbcType="DOUBLE" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, projection_time, district, film_id, heya, name, phone, seat, shopid, uid, create_time,
+    update_time, province, city, longitude, latitude, address
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cinema
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cinema
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mango.model.Cinema" >
+    insert into cinema (id, projection_time, district,
+    film_id, heya, name,
+    phone, seat, shopid,
+    uid, create_time, update_time,
+    province, city, longitude,
+    latitude, address)
+    values (#{id,jdbcType=VARCHAR}, #{projectionTime,jdbcType=TIMESTAMP}, #{district,jdbcType=VARCHAR},
+    #{film_id,jdbcType=VARCHAR}, #{heya,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+    #{phone,jdbcType=VARCHAR}, #{seat,jdbcType=VARCHAR}, #{shopid,jdbcType=VARCHAR},
+    #{uid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+    #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{longitude,jdbcType=DOUBLE},
+    #{latitude,jdbcType=DOUBLE}, #{address,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mango.model.Cinema" >
+    insert into cinema
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectionTime != null" >
+        projection_time,
+      </if>
+      <if test="district != null" >
+        district,
+      </if>
+      <if test="filmId != null" >
+        film_id,
+      </if>
+      <if test="heya != null" >
+        heya,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="seat != null" >
+        seat,
+      </if>
+      <if test="shopid != null" >
+        shopid,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="projectionTime != null" >
+        #{projectionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="filmId != null" >
+        #{filmId,jdbcType=VARCHAR},
+      </if>
+      <if test="heya != null" >
+        #{heya,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="seat != null" >
+        #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="shopid != null" >
+        #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mango.model.Cinema" >
+    update cinema
+    <set >
+      <if test="projectionTime != null" >
+        projection_time = #{projectionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="district != null" >
+        district = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="filmName != null" >
+        film_id = #{filmId,jdbcType=VARCHAR},
+      </if>
+      <if test="heya != null" >
+        heya = #{heya,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="seat != null" >
+        seat = #{seat,jdbcType=VARCHAR},
+      </if>
+      <if test="shopid != null" >
+        shopid = #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mango.model.Cinema" >
+    update cinema
+    set projection_time = #{projectionTime,jdbcType=TIMESTAMP},
+      district = #{district,jdbcType=VARCHAR},
+      film_id = #{filmId,jdbcType=VARCHAR},
+      heya = #{heya,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      seat = #{seat,jdbcType=VARCHAR},
+      shopid = #{shopid,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      address = #{address,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT
+    c.id, c.projection_time, c.district, c.film_id, c.heya, c.`name`,
+    c.phone, c.seat, c.shopid, c.create_time, c.update_time
+    FROM cinema c, film f
+    WHERE
+    <if test="filmName != null and filmName!='' ">
+      c.film_id = #{filmId,jdbcType=VARCHAR} AND
+    </if>
+    c.film_id = f.`id`
+    ORDER BY c.projection_time
+
+  </select>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mango.mapper.ScoreMapper">
+
+  <resultMap id="BaseResultMap" type="com.mango.model.Score">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="filmid" jdbcType="VARCHAR" property="filmid" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="score" jdbcType="VARCHAR" property="score" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_time, filmid, grade, score, uid, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from score
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="findAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from score
+    WHERE
+    <if test="uid != null and uid != ''">
+      uid =  #{uid,jdbcType=VARCHAR} AND
+    </if>
+    ORDER BY create_time
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from score
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mango.model.Score">
+    insert into score (id, create_time, filmid, 
+      grade, score, uid, 
+      update_time)
+    values (#{id,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{filmid,jdbcType=VARCHAR}, 
+      #{grade,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mango.model.Score">
+    insert into score
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="filmid != null">
+        filmid,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filmid != null">
+        #{filmid,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mango.model.Score">
+    update score
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="filmid != null">
+        filmid = #{filmid,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mango.model.Score">
+    update score
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      filmid = #{filmid,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

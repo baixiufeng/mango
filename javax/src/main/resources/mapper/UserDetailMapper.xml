@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mango.mapper.UserDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.mango.model.UserDetail" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="alipay" property="alipay" jdbcType="VARCHAR" />
+    <result column="bank_cardid" property="bankCardid" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="document_type" property="documentType" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="identityid" property="identityid" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="we_chat" property="weChat" jdbcType="VARCHAR" />
+    <result column="webo" property="webo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, alipay, bank_cardid, create_time, document_type, email, identityid, phone, qq, 
+    user_id, update_time, we_chat, webo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mango.model.UserDetail" >
+    insert into user_detail (id, alipay, bank_cardid, 
+      create_time, document_type, email, 
+      identityid, phone, qq, 
+      user_id, update_time, we_chat, 
+      webo)
+    values (#{id,jdbcType=VARCHAR}, #{alipay,jdbcType=VARCHAR}, #{bankCardid,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{documentType,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{identityid,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{qq,jdbcType=INTEGER}, 
+      #{userId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{weChat,jdbcType=VARCHAR}, 
+      #{webo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mango.model.UserDetail" >
+    insert into user_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="alipay != null" >
+        alipay,
+      </if>
+      <if test="bankCardid != null" >
+        bank_cardid,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="documentType != null" >
+        document_type,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="identityid != null" >
+        identityid,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="weChat != null" >
+        we_chat,
+      </if>
+      <if test="webo != null" >
+        webo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="alipay != null" >
+        #{alipay,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardid != null" >
+        #{bankCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="documentType != null" >
+        #{documentType,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="identityid != null" >
+        #{identityid,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="weChat != null" >
+        #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="webo != null" >
+        #{webo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mango.model.UserDetail" >
+    update user_detail
+    <set >
+      <if test="alipay != null" >
+        alipay = #{alipay,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardid != null" >
+        bank_cardid = #{bankCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="documentType != null" >
+        document_type = #{documentType,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="identityid != null" >
+        identityid = #{identityid,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="weChat != null" >
+        we_chat = #{weChat,jdbcType=VARCHAR},
+      </if>
+      <if test="webo != null" >
+        webo = #{webo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mango.model.UserDetail" >
+    update user_detail
+    set alipay = #{alipay,jdbcType=VARCHAR},
+      bank_cardid = #{bankCardid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      document_type = #{documentType,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      identityid = #{identityid,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      we_chat = #{weChat,jdbcType=VARCHAR},
+      webo = #{webo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
