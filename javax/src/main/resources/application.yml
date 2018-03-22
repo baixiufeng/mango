@@ -26,10 +26,10 @@ spring:
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
   thymeleaf:
-    mode: HTML5
-   # suffix: .html
-   # encoding: UTF-8
-   # content-type: text/html
+    suffix: .html
+    encoding: UTF-8
+    content-type: text/html
+    mode: LEGACYHTML5
     cache: false
     prefix: classpath:/templates/
 #email配置
@@ -70,6 +70,7 @@ spring:
           hibernate:
             dialect: org.hibernate.dialect.MySQL5Dialect
 
+
 #pagehelper分页插件
 pagehelper:
   helper-dialect: mysql
@@ -88,3 +89,10 @@ securityconfig:
   urlroles: /**/new = manage,admin;
              /**/edit/** = admin;
              /**/delete/** = admin;
+
+qiniu:
+  accessKey: Spb9jJx5hepXUGLPYShnMC5yQIk144T-ZHWsElWh
+  secretKey: 2G2WOnPHrDPxqGD_MSgVppmHdY5Pi34TNc77llNq
+  bucket: mangoimage
+  path: p5xdps568.bkt.clouddn.com
+  domainOfBucket: http://devtools.qiniu.com;

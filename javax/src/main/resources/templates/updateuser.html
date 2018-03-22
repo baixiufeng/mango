@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>更新用户信息</title>
+    <style>
+        .list-group-item active{
+            border-right-color: #286090;
+            border-right-width: 5px;
+        }
+    </style>
+</head>
+<body class="container">
+    <div th:include="header"></div>
+    <div style="padding:5% 20% 20% 0">
+        <div th:include="usermenu"></div>
+        <div class="col-md-8" style="padding: 1%;margin: 1%">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" role="form" action="/user/update">
+                <div class="form-group">
+                    <label for="name" class="col-md-3">名称</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="请输入名称"/>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3">昵称</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="nickName" name="nickName" placeholder="请输入昵称"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3">email</label>
+                    <div class="col-md-9">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="请输入email"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3">手机号码</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="请输入手机号"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3">性别</label>
+                    <div class="col-md-9">
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" id="sex" th:name="sex" value="option1" checked> 美男子
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" id="sex"  value="option2"> 女王大人
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3">生日</label>
+                    <div class="input-group" style="padding-left: 15px;width: 72%;">
+                        <input type='text' class="form-control date col-md-9" name="dateOfBirth" id="dateOfBirth"/>
+                        <span class="input-group-addon">
+                            <span for="dateOfBirth" class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3">出生地点</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="incunabulum" name="incunabulum" placeholder="请输入出生地点"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3">简介</label>
+                    <div class="col-md-9">
+                        <textarea class="form-control" rows="3" id="synopsis" name="synopsis" placeholder="我的简介..."></textarea>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3">上传头像</label>
+                    <div class="col-md-9">
+                        <input type="file" id="file"/>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary">提交</button>
+                    <!-- Standard button -->
+                    <button type="button" class="btn btn-default">返回</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

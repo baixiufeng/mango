@@ -1,0 +1,5 @@
+<root>
+    <item name='org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>

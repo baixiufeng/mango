@@ -4,14 +4,22 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mango.mapper.UserInfoMapper;
 import com.mango.model.UserInfo;
+import com.mango.utils.QiniuUtil;
 import com.mango.utils.UuidUtil;
+import com.qiniu.common.QiniuException;
+import com.qiniu.http.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.util.StringUtils;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 /**
  * @author baixiufeng
@@ -22,17 +30,43 @@ import java.util.regex.Pattern;
 public class UserInfoService {
     @Autowired
     public UserInfoMapper userInfoMapper;
+    @Autowired
+    public QiniuUtil qiniuUtil;
     //保存用户
-    public Integer save(UserInfo userInfo){
+    public Integer save(UserInfo userInfo, MultipartFile multipartFile) throws IOException {
         userInfo.setId(UuidUtil.getUuid32());
         userInfo.setCreatTime(new Date());
-
+        FileInputStream inputStream = (FileInputStream) multipartFile.getInputStream();
+        String imgpath = qiniuUtil.uploadImg(inputStream, userInfo.getName()+userInfo.getId());
+        if (!imgpath.isEmpty()){
+            userInfo.setHeadPortrait(imgpath);
+        }
         Integer result=userInfoMapper.insert(userInfo);
         return result;
     }
     //更新用户信息
-    public Integer update(UserInfo userInfo){
+    public Integer update(UserInfo userInfo, MultipartFile multipartFile){
         userInfo.setUpdateTime(new Date());
+        UserInfo userInfo1 =userInfoMapper.selectByPrimaryKey(userInfo.getId());
+        if(!userInfo1.getHeadPortrait().isEmpty()){
+            String headPortrait = userInfo.getHeadPortrait();
+            try {
+                Response result=qiniuUtil.delImgFile(StringUtils.substringAfter(userInfo1.getHeadPortrait(),"/"));
+                if (result.statusCode==200){
+                    FileInputStream inputStream = (FileInputStream) multipartFile.getInputStream();
+                    String imgpath = qiniuUtil.uploadImg(inputStream, userInfo.getName()+userInfo.getId());
+                    if (!imgpath.isEmpty()){
+                        userInfo.setHeadPortrait(imgpath);
+                    }
+                }
+            } catch (QiniuException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
         Integer result=userInfoMapper.updateByPrimaryKeySelective(userInfo);
         return result;
     }

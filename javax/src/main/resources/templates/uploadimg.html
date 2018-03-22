@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>uploadimg.html</title>
+
+    <meta name="keywords" content="keyword1,keyword2,keyword3"></meta>
+    <meta name="description" content="this is my page"></meta>
+
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+</head>
+
+<body>
+<form enctype="multipart/form-data" method="post" action="/fileload/article/img/qiniu">
+
+    <label>姓名</label><input type="text" name="name"/>
+    <label>密码</label><input type="password" name="password"/>
+    <label>上传图片</label>
+    <input type="file" name="file"/>
+    <input type="submit" value="上传"/>
+</form>
+</body>
+</html>

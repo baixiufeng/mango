@@ -8,6 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.io.IOException;
 
 /**
  * @author baixiufeng
@@ -22,8 +26,8 @@ public class UserInfoController {
     private UserInfoService userInfoService;
 
     @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public String register(@RequestBody UserInfo userInfo){
-       int result=userInfoService.save(userInfo);
+    public String register(@RequestBody UserInfo userInfo,@RequestParam("file")MultipartFile multipartFile) throws IOException {
+       int result= userInfoService.save(userInfo,multipartFile);
        if(result ==1){
            return "success";
        }else {
@@ -57,8 +61,8 @@ public class UserInfoController {
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public String update(@RequestBody UserInfo userInfo){
-       int result = userInfoService.update(userInfo);
+    public String update(@RequestBody UserInfo userInfo,@RequestParam("file")MultipartFile multipartFile){
+       int result = userInfoService.update(userInfo,multipartFile);
        logger.info("修改->ID"+userInfo.getId());
         if (result ==1) {
             return "success";
