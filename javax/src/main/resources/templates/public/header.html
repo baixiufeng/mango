@@ -5,8 +5,7 @@
     <meta name="description" content="51MANGO.XIN是为摄影爱好者提供的相互交流相互学习的平台，
     这里有专业的摄影教程，资深摄影师点评，热门活动，更全的摄影咨询"/>
     <meta name="keyword" content="51mango，我要芒果，摄影爱好者，美图鉴赏，光圈的故事"/>
-    <meta name="keywords" content="keyword1,keyword2,keyword3"></meta>
-    <meta name="description" content="this is my page"></meta>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="shortcut icon" type="image/x-icon" th:href="@{image/logoicon.png}"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}" type="text/css"/>
@@ -17,11 +16,12 @@
     <script th:src="@{/js/bootstrapValidator.min.js}"></script>
     <script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
     <script th:src="@{/js/bootstrap-datetimepicker.zh-CN.js}"></script>
+    <script th:src="@{/js/vue.js}"></script>
     <script th:src="@{/js/public.js}"></script>
 </head>
-<body class="container">
+<body>
     <ul class="nav nav-pills" style="border: 1px solid #fff;border-bottom-color: #e9e9f7;border-bottom-width: 3px;">
-        <li role="presentation" ><a href="#">风景</a></li>
+        <li role="presentation" ><a th:href="@{picturepage}">风景</a></li>
         <li role="presentation" ><a href="#">人物</a></li>
         <li role="presentation" ><a href="#">微摄影</a></li>
         <li role="presentation" ><a href="#">单反课堂</a></li>
@@ -29,7 +29,6 @@
         <li role="presentation" style="margin-left: 56%;"><a href="#" style="font-weight: bold;color: #2aabd2">登陆</a></li>
         <li role="presentation" style="margin-top: 8px;color: #d2cccc;">|</li>
         <li role="presentation"><a href="#" style="font-weight: bold;color: #3e8f3e">注册</a></li>
-
     </ul>
 </body>
 </html>

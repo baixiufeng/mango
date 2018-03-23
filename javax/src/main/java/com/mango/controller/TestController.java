@@ -9,7 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class TestController {
     @RequestMapping(value = "/upuser",method = RequestMethod.GET)
     public String updateuser(){
-
         return "updateuser";
+    }
+    @RequestMapping(value = "/picturepage",method = RequestMethod.GET)
+    public String picturepage(){
+        return "picturelist";
+    }
+    @RequestMapping(value = "/picture_detail",method = RequestMethod.GET)
+    public String picture_detail(){
+        return "picture_detail";
     }
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:include="public/header"></div>
+    <div class="app">
+        <div >11111</div>
+    </div>
+</body>
+<script>
+    function getContextPath() {
+        var host=window.location.host;
+        var protocol=window.location.protocol;
+        return protocol+"//"+host;
+    }
+    var vueData = {
+        picture:{}
+    }
+    var vueApp = new Vue({
+        el: '.app',
+        data: vueData,
+        methods:{},
+        mounted: function () {
+            console.log("d6183da3b69b4ce88401575d290b92fb");
+            $.ajax({
+                type: 'GET',
+                url: getContextPath()+'/picture/selectByid',
+                data:{id: "d6183da3b69b4ce88401575d290b92fb"},
+                dataType: "json",
+                success:function(result){
+                    vueData.picture=result;
+                    console.log(result);
+                }
+            })
+        }
+    })
+</script>
+</html>
