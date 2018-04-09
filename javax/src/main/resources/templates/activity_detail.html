@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>活动详情</title>
+    <style>
+        .aligncenter {
+            clear: both;
+            display: block;
+            margin:auto;
+            width: 60em;
+        }
+        .labelcss{
+            text-align: center;
+            color: #b5b2b5;
+            font-size: 0.6em;
+            line-height: 4em;
+        }
+        p{
+            line-height: 28px;
+            font-size: 16px;
+            margin-top: 2em;
+        }
+    </style>
+</head>
+<body>
+<div th:include="public/header"></div>
+<div class="container" style="padding-bottom: 7%">
+    <el-row :gutter="20">
+        <el-breadcrumb separator-class="el-icon-arrow-right" style="margin: 10px">
+            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/' }">活动详情</el-breadcrumb-item>
+        </el-breadcrumb>
+        <el-col :span="19" style="margin: 20px">
+            <h1 style="color: rgb(42, 171, 210);text-align: center;font-size: 3em;font-weight: bold;" center>{{activitydetail.name}}</h1>
+            <div class="labelcss">
+                <label>作者：{{activitydetail.author}}&nbsp;&nbsp;&nbsp;</label>
+                <label>发布于：{{new Date(activitydetail.updateTime).toLocaleString()}}</label>
+            </div>
+            <img :src="activitydetail.photo" class="aligncenter"/>
+            <p >{{activitydetail.synopsis}}</p>
+            <div id="SOHUCS" sid="activitydetail.id"></div>
+        </el-col>
+
+    </el-row>
+
+
+</div>
+</body>
+<script>
+    function getContextPath() {
+        var host=window.location.host;
+        var protocol=window.location.protocol;
+        return protocol+"//"+host;
+    }
+    var vueData ={
+        activitydetail:"",
+    }
+    var vueApp= new Vue({
+        el:'.container',
+        data:vueData,
+        mounted: function(){
+            $.ajax({
+                type: 'GET',
+                url: getContextPath()+'/activity/selectByid',
+                data:{id:'5b2dac7fd082491bb16b7834964a6f16'},
+                dataType: "json",
+                success:function(result){
+                    vueData.activitydetail=result;
+                }
+            })
+        }
+    })
+</script>
+</html>

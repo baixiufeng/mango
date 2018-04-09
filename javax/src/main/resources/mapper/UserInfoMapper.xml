@@ -259,4 +259,12 @@
       email = #{email,jdbcType=VARCHAR}
     </if>
   </select>
+
+  <select id="findByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+   select u.*,r.role_name from user_info u
+ LEFT JOIN user_resource ur on ur.user_id = u.id
+ LEFT JOIN user_role r on ur.role_id = r.id
+where u.phone =#{phone,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

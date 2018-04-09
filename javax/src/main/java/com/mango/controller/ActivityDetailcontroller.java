@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.mango.model.ActivityDetail;
 import com.mango.service.ActivityDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -18,7 +20,8 @@ public class ActivityDetailcontroller {
     private ActivityDetailService activityDetailService;
 
     @RequestMapping(value="/page",method = RequestMethod.GET)
-    public PageInfo<ActivityDetail> pages(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize,@RequestParam(value = "uid",required = false) String uid){
+    public PageInfo<ActivityDetail> pages(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize,
+                                          @RequestParam(value = "uid",required = false) String uid){
         return activityDetailService.pageInfo(pageNo, pageSize, uid);
     }
 

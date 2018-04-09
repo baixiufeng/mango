@@ -2,6 +2,7 @@ package com.mango.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mango.config.PageBean;
 import com.mango.mapper.PictureMapper;
 import com.mango.model.Picture;
 import com.mango.utils.UuidUtil;
@@ -40,10 +41,13 @@ public class PictureService {
         return result;
     }
     //分页查询用户
-    public PageInfo<Picture> pageInfo(Integer  pageNo, Integer  pageSize,String uid){
-        PageHelper.startPage(pageNo,pageSize);
-        List<Picture> picturesList = pictureMapper.findAll(uid);
-        PageInfo<Picture> pagelist = new PageInfo<Picture>(picturesList);
-        return pagelist;
+    public List<Picture> pictureList(String uid){
+        return pictureMapper.findAll(uid);
+    }
+
+    public PageBean<Picture> selectPictureList(Integer pageNum, Integer pageSize, String uid){
+        PageHelper.startPage(pageNum,pageSize);
+        List<Picture> list = pictureMapper.findAll(uid);
+        return new PageBean<>(list);
     }
 }

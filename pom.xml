@@ -89,22 +89,35 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		<!-- security 权限控制 -->
+		<!--springboot-->
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>4.2.2.RELEASE</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>4.2.2.RELEASE</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 		</dependency>
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
             <version>1.9.22</version>
         </dependency>
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<!-- Spring Framework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -173,7 +186,9 @@
             <artifactId>spring-context-support</artifactId>
             <version>4.3.9.RELEASE</version>
         </dependency>
-    </dependencies>
+
+
+	</dependencies>
 
 	<build>
         <finalName>51mango</finalName>
@@ -188,7 +203,7 @@
 				<artifactId>mybatis-generator-maven-plugin</artifactId>
 				<version>1.3.2</version>
 				<configuration>
-					<configurationFile>javax/src/main/resources/generator/generatorConfig.xml</configurationFile>
+					<configurationFile>javax\src\main\resources\generator\generatorConfig.xml</configurationFile>
 					<overwrite>true</overwrite>
 					<verbose>true</verbose>
 				</configuration>
