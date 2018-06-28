@@ -1,0 +1,28 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    name: uat
+    url: jdbc:mysql://localhost:3306/mango_db?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: Bai880806
+    type: com.alibaba.druid.pool.DruidDataSource
+    tomcat:
+      max-active: 20
+      max-wait: 60000
+      initial-size: 1
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 30000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+    dbcp2:
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.mango.model
+
