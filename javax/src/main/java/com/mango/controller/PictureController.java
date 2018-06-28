@@ -1,10 +1,15 @@
 package com.mango.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mango.config.PageBean;
 import com.mango.model.Picture;
 import com.mango.service.PictureService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author baixiufeng
@@ -18,7 +23,10 @@ public class PictureController {
     private PictureService pictureService;
     @RequestMapping(value="/page",method = RequestMethod.GET)
     public PageInfo<Picture> pages(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize, @RequestParam(value = "uid",required = false) String uid){
-        return pictureService.pageInfo(pageNo, pageSize, uid);
+        PageHelper.startPage(pageNo,pageSize);
+        List<Picture> picturesList = pictureService.pictureList(uid);
+        PageInfo<Picture> pagelist = new PageInfo<Picture>(picturesList);
+        return pagelist;
     }
 
     @RequestMapping(value="/selectByid",method=RequestMethod.GET)

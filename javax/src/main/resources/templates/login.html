@@ -250,13 +250,13 @@
                     })
             })
         })
-        $("#loginSubmit").click(function () {
+       /* $("#loginSubmit").click(function () {
             alert(1111);
             var username=$("#username").val();
             var password = $("#password").val();
             $.ajax({
                 type:"get",
-                url:"/info/logins",
+                url:"/logins",
                 async: false,
                 traditional: true,
                 data:JSON.stringify({"phone":username,"password":password}),
@@ -265,7 +265,7 @@
 
                 }
             })
-        })
+        })*/
         $(window).scroll(function () {
             if ($(".navbar").offset().top > 50) {$(".navbar-fixed-top").addClass("top-nav");
             }else {$(".navbar-fixed-top").removeClass("top-nav");}
@@ -363,10 +363,10 @@
     <div class="logindiv" >
         <div style="background-color: rgba(221,226,255,0.8); width: 350px;height: 280px;float: right;margin-right: 7%;margin-top: 8%; padding: 2%;border-radius: 10px" >
 
-            <form class="form-horizontal" role="form" action="/info/logins">
+            <form class="form-horizontal" role="form" action="/logins" th:action="@{/logins}" method="post">
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <input type="text" class="form-control" id="username" placeholder="请输手机号或邮箱" />
+                        <input type="text" class="form-control" id="username" placeholder="请输手机号" />
                     </div>
                 </div>
                 <div class="form-group">

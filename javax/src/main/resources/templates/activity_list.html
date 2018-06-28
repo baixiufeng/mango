@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>活动</title>
+    <style>
+        .time {
+            font-size: 13px;
+            color: #999;
+        }
+        .box-card{
+            margin: 15px;
+            width: 100%;
+        }
+        .box-card a{
+            color: #000;
+        }
+        .box-card a:hover{
+            color: #409EFF;
+            text-decoration: none;
+        }
+        .box-card p{
+            width: 80%;
+            float:left;
+            font-size: 17px;
+            text-align: left;
+            color: #565656;
+            text-overflow: -o-ellipsis-lastline;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+        }
+        .box-card img{
+            border-radius: 13px;
+            width: 20%;
+            float: left;
+            padding: 7px;
+            margin-top: -30px;
+        }
+    </style>
+</head>
+<body>
+        <div th:include="public/header"></div>
+    <el-col class="container" style="padding-bottom: 7%">
+        <el-row :gutter="19" style="float: left">
+            <el-breadcrumb separator-class="el-icon-arrow-right" style="margin: 10px">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item>活动</el-breadcrumb-item>
+            </el-breadcrumb>
+            <el-col :span="19" style="margin: 20px">
+
+                <el-card class="box-card" v-for="item in activitylist" shadow="hover">
+                    <a v-on:click="activity_detail(item.id)" href="javascript:void(0)" style="font-weight: bolder;font-size: 24px;">
+                       {{item.name}}
+                    </a>
+                    <div style="margin-top: 20px">
+                        <p>{{item.detail}}</p>
+                        <img :src="item.photo"/>
+                    </div>
+
+                    <div class="bottom clearfix" style="clear: both;">
+                        <i class="mdi mdi-alarm-multiple mdi-18px" style="color: #8c8c8c">&nbsp;{{new Date(item.creatTime).toLocaleDateString()}}&nbsp;</i>
+                        <i class="mdi mdi-thumb-up mdi-18px" style="color: #8c8c8c;">&nbsp;{{item.hate}}1231232</i>
+                    </div>
+                </el-card>
+                <div align="center">
+                    <el-pagination
+                            @size-change="handleSizeChange"
+                            @current-change="handleCurrentChange"
+                            :current-page="currentPage"
+                            :page-sizes="[5, 15, 20, 25, 30]"
+                            :page-size="pagesize"
+                            layout="total, sizes, prev, pager, next, jumper"
+                            :total="page.totalCount">
+                    </el-pagination>
+                </div>
+            </el-col>
+            <el-col :span="5" style="float: left;background-color: #8c8c8c">
+                <h1>热门新闻</h1>
+                <div id="cyHotnews" role="cylabs" data-use="hotnews"></div>
+
+            </el-col>
+
+        </el-row>
+
+    </el-col>
+</body>
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cytyqTdLf"></script>
+
+<script>
+    function getContextPath() {
+        var host=window.location.host;
+        var protocol=window.location.protocol;
+        return protocol+"//"+host;
+    }
+    var vueData={
+        activitylist:[],
+        page: {},
+        currentPage: 0,
+        pagesize: 5
+    }
+    var vueApp=new Vue({
+        el: '.container',
+        data: vueData,
+
+        methods: {
+            activity_detail: function(val) {
+                $.ajax({
+                    type: 'GET',
+                    url: getContextPath()+'/activity/selectByid',
+                    data:{"id":val},
+                    dataType: "json",
+                    success:function(result){
+                        vueData.activitylist=result.list;
+                    }
+                })
+            }
+        },
+        methods:{
+            //每页显示数据量变更
+            handleSizeChange: function(val) {
+                this.pagesize = val;
+                this.cartView(vueData.currentPage,vueData.pagesize);
+            },
+
+            //页码变更
+            handleCurrentChange: function(val) {
+                this.currentPage = val;
+                this.cartView(vueData.currentPage,vueData.pagesize);
+            },
+
+            cartView: function (currentPage,pageSize) {
+
+                if (currentPage == 0){
+                    pageNo = 1;
+                }else {
+                    pageNo = currentPage;
+                }
+                $.ajax({
+                    type: 'GET',
+                    url: getContextPath()+'/activity/page',
+                    data:{pageNo:pageNo,pageSize:pageSize},
+                    dataType: "json",
+                    success:function(result){
+                        vueData.activitylist=result.list;
+                        vueData.page.currentPage = result.pageNum;
+                        vueData.page.totalCount = result.total;
+
+                    }
+                })
+            }
+        },
+        mounted: function(){
+            this.cartView(vueData.currentPage,vueData.pagesize);
+        }
+
+    })
+</script>
+</html>

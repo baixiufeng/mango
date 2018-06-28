@@ -45,6 +45,7 @@ public class UserInfo {
 
     private Date updateTime;
 
+    private List<UserRole> roles;
 
     public String getId() {
         return id;
@@ -190,5 +191,19 @@ public class UserInfo {
         this.updateTime = updateTime;
     }
 
+    public String getSalt() {
+        return salt;
+    }
 
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public List<UserRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<UserRole> roles) {
+        this.roles = roles;
+    }
 }

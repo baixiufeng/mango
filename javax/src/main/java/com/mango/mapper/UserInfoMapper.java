@@ -20,4 +20,6 @@ public interface UserInfoMapper {
     List<UserInfo> findAll();
 
     UserInfo findByPhoneOrEmail(@Param("email") String email,@Param("phone") String phone);
+
+    UserInfo findByUserName(@Param("phone") String phone);
 }
