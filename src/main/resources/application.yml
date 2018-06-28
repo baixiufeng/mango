@@ -22,7 +22,15 @@ spring:
     dbcp2:
       pool-prepared-statements: true
       max-open-prepared-statements: 20
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+
 mybatis:
-  mapper-locations: classpath:mapping/*.xml
+  mapper-locations: classpath:mappering/*.xml
   type-aliases-package: com.mango.model
+security:
+  basic:
+    enabled: false
 

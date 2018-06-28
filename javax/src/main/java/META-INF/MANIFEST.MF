@@ -34,5 +34,5 @@ Class-Path: spring-oxm-4.3.7.RELEASE.jar commons-collections-3.2.2.jar
  1.7.jar spring-boot-starter-thymeleaf-1.5.2.RELEASE.jar logback-core-
  1.1.11.jar jquery-1.11.1.jar commons-lang-2.4.jar spring-boot-autocon
  figure-1.5.2.RELEASE.jar
-Main-Class: com.mango.MangoApplication
+Main-Class: com.mango.Application
 
